@@ -1,0 +1,54 @@
+﻿@model RegistrationViewModel
+@{
+    ViewBag.Title = "Registrations";
+}
+
+<h1>Customer: @Model.Customer.FullName</h1>
+<h1>Registrations</h1>
+@if (Model.Registrations.Count() > 0)
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Registration r in Model.Registrations)
+            {
+                <tr>
+                    <td>@r.Product.Name</td>
+                    <td>
+                        <form asp-action="Delete" method="post">
+                            <input type="hidden" name="CustomerID" value="@r.CustomerID" />
+                            <input type="hidden" name="ProductID" value="@r.ProductID" />
+                            <button type="submit" class="btn btn-primary">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>The selected customer has no registered products.</p>
+}
+
+<h1>Product</h1>
+<form asp-action="Register" method="post">
+
+    <div class="form-group">
+        <select asp-for="ProductID"
+                asp-items="@(new SelectList(Model.Products,
+                             "ProductID", "Name",
+                             Model.ProductID.ToString()))"
+                class="form-control">
+            <option value="0">Select a product...</option>
+        </select>
+
+        <input type="hidden" asp-for="CustomerID" />
+        <button type="submit" class="btn btn-primary mt-2">Register</button>
+    </div>
+</form>

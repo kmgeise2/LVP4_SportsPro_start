@@ -1,0 +1,109 @@
+﻿@model Customer
+@{
+    string title = ViewBag.Action + " Customer";
+    ViewBag.Title = title;
+}
+
+@section scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<h1>@ViewBag.Title</h1>
+
+<form asp-action="Save" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row form-group">
+        <label asp-for="FirstName" class="col-sm-3">First Name</label>
+        <div class="col-sm-6">
+            <input asp-for="FirstName" class="form-control">
+        </div>
+        @*Error message added to row here*@
+        <div class="col">
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label asp-for="LastName" class="col-sm-3">Last Name</label>
+        <div class="col-sm-6">
+            <input asp-for="LastName" class="form-control">
+        </div>
+        <div class="col">
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label asp-for="Address" class="col-sm-3">Address</label>
+        <div class="col-sm-6">
+            <input asp-for="Address" class="form-control">
+        </div>
+        <div class="col">
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label asp-for="City" class="col-sm-3">City</label>
+        <div class="col-sm-6">
+            <input asp-for="City" class="form-control">
+        </div>
+        <div class="col">
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label asp-for="State" class="col-sm-3">State</label>
+        <div class="col-sm-6">
+            <input asp-for="State" class="form-control">
+        </div>
+        <div class="col">
+            <span asp-validation-for="State" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label asp-for="PostalCode" class="col-sm-3">Postal Code</label>
+        <div class="col-sm-6">
+            <input asp-for="PostalCode" class="form-control">
+        </div>
+        <div class="col">
+            <span asp-validation-for="PostalCode" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label asp-for="CountryID" class="col-sm-3">Country</label>
+        <div class="col-sm-6">
+            <select asp-for="CountryID"
+                    asp-items="@(new SelectList(ViewBag.Countries,
+                         "CountryID", "Name", Model.CountryID))"
+                    class="form-control">
+                <option value="XX">Select a country...</option>
+            </select>
+        </div>
+        <div class="col">
+            <span asp-validation-for="CountryID" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label asp-for="Email" class="col-sm-3">Email</label>
+        <div class="col-sm-6">
+            <input asp-for="Email" class="form-control">
+        </div>
+        <div class="col">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label asp-for="Phone" class="col-sm-3">Phone</label>
+        <div class="col-sm-6">
+            <input asp-for="Phone" class="form-control">
+        </div>
+        <div class="col">
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+    </div>
+
+    <input type="hidden" asp-for="CustomerID" />
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="List" class="btn btn-primary">Cancel</a>
+</form>
